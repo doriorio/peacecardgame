@@ -14,6 +14,9 @@ The Arena | Player 1 | Player 2 |
 WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
 
 ## Pseudocode
+----
+
+## Init, state, tracked vars
 
 ```
 //Setup - state variables: turn, score, cardsPerPlayer
@@ -30,24 +33,44 @@ WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
 ////Players are Canada (P1) and Switzerland (P2)
 
 
-
 //A countdown displays and if there are two clicks (one per player) on the arena, the click listener is activated
 
-//Click listener:
+```
+## Click Listener
+```
 
-////Looks at the value of both cards and compares (this will be programmatically generated based on  card number)
 
-//////If one is higher than the other then both cards are collected
+//Looks at the value of both cards and compares (this will be programmatically generated based on  card number)
 
-/////// If they are the same value, _mediation_ begins
+////If one is higher than the other then both cards are collected
 
-//////// Both characters get three cards that go on their side of the "arena" - then they flip over a fourth card and whoever has the lowest value (the "peace" variation) wins all 10 cards (original 2 + )
-_if there aren't enough cards for all for the mediation requirements, they can use whatever they have left
+///// If they are the same value, _mediation_ begins
 
-//Check for win
+```
+## Mediation 
+``` 
+
+// Both characters get three cards that go on their side of the "arena" - then they flip over a fourth card and whoever has the lowest value (the "peace" variation) wins all 10 cards (original 2 + )
+
+////
+_if_ there aren't enough cards for all for the mediation requirements, they can use whatever they have left
+
+``` 
+
+## Check for win
+``` 
 
 ////When a player has all 52 cards, they win
 
 ////if not keep going? (Mental note to look into other scenarios)
+``` 
 
-```
+## Wishlist
+* Countdown for every turn - 3,2,1 go!
+* Different cursors for each player that alternate based on turn
+* A delay in flipping the card
+* Animations
+* Peaceful music
+* Cutesy mediation 'cues' during mediation
+* Dynamic score counter
+
