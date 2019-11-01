@@ -1,0 +1,18 @@
+.container {
+    display: grid;
+    grid-template-columns: 1.75fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+  }
+
+.container .cell {
+    height: 200px;
+    background-color: mediumaquamarine;
+}
+
+  .cell-1 {
+    background-color: black;
+    grid-row: span 2; 
+
+  }
+
+

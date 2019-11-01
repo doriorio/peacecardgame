@@ -7,8 +7,10 @@
 
 The Arena | Player 1 | Player 2 | 
 | ----------- | ----------- | ----------- |
-| :house_with_garden: | :black_joker: | :black_joker: |
-| :black_square_button: | n = 26 | n = 26|
+| :v: (where mediation happens)| :black_joker: | :black_joker: |
+| :black_square_button: (where regular gameplay happens) | n = 26 | n = 26|
+:alarm_clock: (clock counts down 3,2,1 every turn)
+
 
 ### The Rules
 WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
@@ -30,7 +32,6 @@ WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
 ////The score is 0
 
 
-////Players are Canada (P1) and Switzerland (P2)
 
 
 //A countdown displays and if there are two clicks (one per player) on the arena, the click listener is activated
@@ -73,4 +74,5 @@ _if_ there aren't enough cards for all for the mediation requirements, they can 
 * Peaceful music
 * Cutesy mediation 'cues' during mediation
 * Dynamic score counter
+* Make players be countries: Canada & switzerland and have a map highlight with the country (player) based on who wins the cards in the turn
 
