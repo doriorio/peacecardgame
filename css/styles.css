@@ -3,7 +3,7 @@ font-family: 'Chathura', sans-serif; */
 
 .container {
     display: grid;
-    grid-template-columns: 1.75fr 1fr 1fr; 
+    grid-template-columns: 300px 200px 200px; 
     grid-template-rows: 1fr 1fr; 
     row-gap: 10px;
     column-gap: 10px;
@@ -11,6 +11,7 @@ font-family: 'Chathura', sans-serif; */
 
 .container .cell {
     height: 200px;
+    overflow-wrap: break-word;
     background-color: mediumaquamarine;
 
 }
@@ -26,3 +27,8 @@ h2 {
   font-family: 'Srisakdi', cursive;
 
 }
+/* temporary */
+/* #full-deck-hold {
+  overflow-wrap: break-word;
+  width: 400px;
+} */

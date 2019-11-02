@@ -10,6 +10,7 @@ suits.forEach(function(e){
     })
 })
 
+
 //go back and give values in an object later - 
 //for now use the text at the end for values
 
@@ -20,10 +21,19 @@ suits.forEach(function(e){
 
 /*----- cached element references -----*/ 
 //allcards = 52
+var fullStack = document.getElementById('full-deck-hold')
+var playerX = document.getElementById('playerX')
+var playerY = document.getElementById('playerY')
+
 
 /*----- event listeners -----*/ 
 //first, click the fulldeck hold box to give both players half the deck
-document.getElementById('full-deck-hold').addEventListener('click',shuffleDeck)
+fullStack.addEventListener('click',shuffleDeck);
+playerX.addEventListener('click',alert);
+
+function alert(){
+    console.log('hitting');
+}
 
 
 //A countdown displays and if there are two clicks (one per player) on the arena, the click listener is activated
@@ -47,16 +57,32 @@ function shuffleDeck() {
     while (tempDeck.length) {
         var rndIdx = (Math.floor(Math.random() * tempDeck.length))
         shuffleAll.push(tempDeck.splice(rndIdx, 1)[0])
+        fullStack.innerHTML = shuffleAll;
     }
     shuffleAll.forEach(function(card,i){
-        if (i%2){
+        if (i < 26) {
+            if (xHand.length === 26){
+                return;
+            }
             xHand.push(card);
-        } else {
+            playerX.innerHTML = xHand;
+        } if (i >= 26) {
+            if (yHand.length === 26) {
+                return;
+            }
             yHand.push(card);
+            playerY.innerHTML = yHand;
         }
-
     })
+
 }
+
+
+// function render(){
+//   playerX.innerHTML = xHand;
+//   console.log('hitting');
+
+// }
 
 //clickHandle()
 //mediation
