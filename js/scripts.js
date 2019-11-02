@@ -3,14 +3,15 @@
 //card values
 var suits = ['s', 'c', 'd', 'h'];
 var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
-
-//go back and give values in an object later
 var fullDeck = []
 suits.forEach(function(e){
     ranks.forEach(function(j){
      fullDeck.push(e.concat(j));
     })
 })
+
+//go back and give values in an object later - 
+//for now use the text at the end for values
 
 
 /*----- app's state (variables) -----*/ 
@@ -21,6 +22,10 @@ suits.forEach(function(e){
 //allcards = 52
 
 /*----- event listeners -----*/ 
+//first, click the fulldeck hold box to give both players half the deck
+document.getElementById('full-deck-hold').addEventListener('click',shuffleDeck)
+
+
 //A countdown displays and if there are two clicks (one per player) on the arena, the click listener is activated
 
 //Looks at the value of both cards and compares (this will be programmatically generated based on  card number)
@@ -32,8 +37,30 @@ suits.forEach(function(e){
 
 
 /*----- functions -----*/
+//shuffleDeck
+xHand = [];
+yHand = [];
+function shuffleDeck() {
+    var tempDeck = fullDeck.slice();
+    var shuffleAll = [];
+    // var yHand = [];
+    while (tempDeck.length) {
+        var rndIdx = (Math.floor(Math.random() * tempDeck.length))
+        shuffleAll.push(tempDeck.splice(rndIdx, 1)[0])
+    }
+    shuffleAll.forEach(function(card,i){
+        if (i%2){
+            xHand.push(card);
+        } else {
+            yHand.push(card);
+        }
+
+    })
+}
+
 //clickHandle()
 //mediation
+
 
 // Both characters get three cards that go on their side of the "arena" - then they flip over a fourth card and whoever has the lowest value (the "peace" variation) wins all 10 cards (original 2 + )
 

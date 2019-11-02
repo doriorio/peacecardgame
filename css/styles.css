@@ -1,3 +1,6 @@
+/* other font in the google stylesheet
+font-family: 'Chathura', sans-serif; */
+
 .container {
     display: grid;
     grid-template-columns: 1.75fr 1fr 1fr; 
@@ -9,10 +12,17 @@
 .container .cell {
     height: 200px;
     background-color: mediumaquamarine;
+
 }
 
   .cell-1 {
-    background-image: url(imgs/justice.png)
+    background-image: url(imgs/justice.png);
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
 
+h2 {
+  font-family: 'Srisakdi', cursive;
+
+}
