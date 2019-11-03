@@ -6,7 +6,7 @@ var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', '0J', '0Q', '
 var fullDeck = []
 suits.forEach(function(e){
     ranks.forEach(function(j,i){
-     fullDeck.push(e.concat(j, " ,", i));
+     fullDeck.push(e.concat(j, "- ", i));
     })
 })
 
@@ -32,6 +32,8 @@ var playerY = document.getElementById('playerY')
 var playerXCard = document.getElementById('playerXcard')
 var playerYCard = document.getElementById('playerYcard')
 var regularPlay = document.getElementById('temp-normal-play')
+var mediationPlay = document.getElementById('temp-mediation')
+var statusMessage = document.getElementById('status-message')
 
 
 /*----- event listeners -----*/ 
@@ -42,10 +44,11 @@ playerY.addEventListener('click',alert);
 playerXCard.addEventListener('click',alert);
 playerYCard.addEventListener('click',alert);
 regularPlay.addEventListener('click',gamePlay);
+mediationPlay.addEventListener('click',invokeMediation);
 
 //use this as a test function when setting up event listeners or as a placeholder
 function alert(){
-    console.log('hitting');
+    console.log('alert');
 }
 
 
@@ -91,48 +94,74 @@ function shuffleDeck() {
     })
 }
 
-//this is a little messy
+//this is a little messy - later on this can be used for both mediation and for reg 
+//by passing in an n that changes the xPick and yPick args
+//would need to iterater over the xCard and yCard values with a forEach to do so
 function gamePlay(){
     xPick(1);
     yPick(1);
-    var xCardValue = parseInt((xCardStatus.toString()).split(",",2)[1]);
-    var yCardValue = parseInt((yCardStatus.toString()).split(",",2)[1]);
+    var xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
+    var yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
     if (xCardValue < yCardValue){
-        xCardStatus.push(yCardStatus);
+        xCardStatus.push("-" + yCardValue);
+        
+        yCardStatus.pop();
+        xCardStatus = xCardStatus.concat(xHand);
+        console.log(xCardStatus);
+        playerX.innerHTML = xCardStatus;
+        
     }
     if (yCardValue < xCardValue){
-        yCardStatus.push(xCardStatus);
+        yCardStatus.push(`- ${xCardValue}`);
+        xCardStatus.pop()
+        playerY.innerHTML = yHand.concat(yCardStatus);
+        yCardStatus = playerY.innerHTML;
+        // console.log(playerY.innerHTML);
     }
     else if (xCardValue === yCardValue){
         invokeMediation();
+        console.log('mediation invoked');
+
     }
+    checkForWin();
 }    
 
+
+
 function invokeMediation(){
+    alert();
+    // xPick(4);
+    // yPick(4);
+    // var xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
+    // var yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+    // if (xCardValue < yCardValue){
+    //     xCardStatus.push(yCardStatus);
+    // }
+    // if (yCardValue < xCardValue){
+    //     yCardStatus.push(xCardStatus);
+    // }
 
 }
 
 function xPick(num){
-    xHandTemp = xHand.slice();
-    playerXCard.innerHTML = xHandTemp.splice(0,num);
+    playerXCard.innerHTML = xHand.splice(0,num);
+    playerX.innerHTML = xHand;
     xCardStatus.push(playerXCard.innerHTML);
 }    
 function yPick(num){
-    yHandTemp = yHand.slice();
-    playerYCard.innerHTML = yHandTemp.splice(0,num);
+    
+    playerYCard.innerHTML = yHand.splice(0,num);
+    playerY.innerHTML = yHand;
     yCardStatus.push(playerYCard.innerHTML);
 }    
 
-//clickHandle()
-//mediation
+function checkForWin(){
+    var yCheck = playerY.innerHTML.toString().split('-');
+    if (yCheck.length === 52){
+        statusMessage.textContent = "Player Y Wins!";
+    }
+    alert();
+}
 
-
-// Both characters get three cards that go on their side of the "arena" - then they flip over a fourth card and whoever has the lowest value (the "peace" variation) wins all 10 cards (original 2 + )
-
-////
-// _if_ there aren't enough cards for all for the mediation requirements, they can use whatever they have left
-
-//check for win
-////cardsperplayer = 52
 //render
 //init
