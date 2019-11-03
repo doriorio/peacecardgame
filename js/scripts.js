@@ -24,13 +24,18 @@ suits.forEach(function(e){
 var fullStack = document.getElementById('full-deck-hold')
 var playerX = document.getElementById('playerX')
 var playerY = document.getElementById('playerY')
+var playerXCard = document.getElementById('playerXcard')
+var playerYCard = document.getElementById('playerYcard')
 
 
 /*----- event listeners -----*/ 
 //first, click the fulldeck hold box to give both players half the deck
 fullStack.addEventListener('click',shuffleDeck);
 playerX.addEventListener('click',alert);
+playerXCard.addEventListener('click',xPick);
+playerYCard.addEventListener('click',yPick);
 
+//use this as a test function when setting up event listeners
 function alert(){
     console.log('hitting');
 }
@@ -74,15 +79,16 @@ function shuffleDeck() {
             playerY.innerHTML = yHand;
         }
     })
-
 }
 
-
-// function render(){
-//   playerX.innerHTML = xHand;
-//   console.log('hitting');
-
-// }
+function xPick(num){
+    xHandTemp = xHand.slice();
+    playerXCard.innerHTML = xHandTemp.splice(0,num);
+}    
+function yPick(num){
+    yHandTemp = yHand.slice();
+    playerYCard.innerHTML = yHandTemp.splice(0,num);
+}    
 
 //clickHandle()
 //mediation
