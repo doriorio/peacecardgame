@@ -12,7 +12,7 @@ font-family: 'Chathura', sans-serif; */
 
 .container .cell {
     height: 200px;
-    overflow-wrap: break-word;
+    /* overflow-wrap: break-word; */
     background-color: mediumaquamarine;
 
 }

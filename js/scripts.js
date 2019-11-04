@@ -9,19 +9,23 @@ suits.forEach(function(e){
     })
 })
 
+// //add this later and make sure to add ace
+// suits.forEach(function(e){
+//     ranks.forEach(function(j){
+//      fullDeck.push(e+j);
+//     })
+// })
+
 //eventually, we need a players object so that the toggling between 
 //x and y functions can be done programmatically
 
-//go back and give values in an object later - 
-//for now use the text at the end for values
-
-
 /*----- app's state (variables) -----*/ 
 
-xHand = [];
-yHand = [];
-xCardStatus = [];
-yCardStatus = [];
+var xHand = [];
+var yHand = [];
+var xCardStatus = [];
+var yCardStatus = [];
+let xCardValue, yCardValue;
 
 /*----- cached element references -----*/ 
 
@@ -37,15 +41,11 @@ var statusMessage = document.getElementById('status-message');
 
 /*----- event listeners -----*/ 
 fullStack.addEventListener('click',alert);
-// playerX.addEventListener('click',alert);
-// playerY.addEventListener('click',alert);
-// playerXCard.addEventListener('click',alert);
-// playerYCard.addEventListener('click',alert);
 regularPlay.addEventListener('click',gamePlay);
 mediationPlay.addEventListener('click',invokeMediation);
 
-//use this as a test function when setting up event listeners or as a placeholder
 /*----- functions -----*/
+//use this as a test function when setting up event listeners or as a placeholder
 function alert(){
     console.log('placeholder function');
 }
@@ -75,58 +75,64 @@ function shuffleDeck() {
     })
 }
 
+
 //this is a little messy - later on this can be used for both mediation and for reg 
 //by passing in an n that changes the xPick and yPick args
 //would need to iterater over the xCard and yCard values with a forEach to do so
 function gamePlay(){
     xPick(1);
     yPick(1);
-    xCardValue = '';
+    // xCardValue = '';
     xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
-    yCardValue = '';
+    // yCardValue = '';
     yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
     checkForWin();
     updateValues();
 }
 
-//ideally the innerHTML setting in x&yPick happens here eventually
-function updateValues(){
-
-    playerX.innerHTML = xHand;
-    playerY.innerHTML = yHand;
-
-
-}
 
 function xPick(num){
     playerXCard.innerHTML = xHand.splice(0,num);
-    xCardStatus.push(playerXCard.innerHTML);
-
+    xCardStatus.unshift(playerXCard.innerHTML);
 }    
 function yPick(num){
     playerYCard.innerHTML = yHand.splice(0,num);
-    yCardStatus.push(playerYCard.innerHTML);
+    yCardStatus.unshift(playerYCard.innerHTML);
 }    
 
 function checkForWin(){
-
+    console.log(xCardValue)
     if (xCardValue < yCardValue){
+        // push the x and y status 
+        // then clear out the x and y card value and x&y status
         xHand.unshift(yCardStatus);
-        yCardStatus = yCardStatus.filter(function(yCard){
-            return yCard !== xHand[0]
-        })
+        xHand.unshift(xCardStatus);
+        yCardStatus = [];
+        xCardStatus = [];
+
+        // yHand = yHand.filter(function(yCard){
+        //     return yCard !== xHand[0]
+        // })
+        // delete yCardStatus[0];
     }
     if (yCardValue < xCardValue){
         yHand.unshift(xCardStatus);
-        xCardStatus = xCardStatus.filter(function(xCard){
-            return xCard !== yHand[0]
-        })
+        yHand.unshift(yCardStatus);
+        xCardStatus = [];
+        yCardStatus = [];
     } 
     else if (xCardValue === yCardValue){
-        invokeMediation();
+        return;
         
     }
     
+}
+//ideally the innerHTML setting in x&yPick happens here eventually
+function updateValues(){
+    playerX.innerHTML = xHand;
+    playerY.innerHTML = yHand;
+    // playerXCard.innerHTML = xCardStatus;
+    // playerYCard.innerHTML = yCardStatus;
 }
 function invokeMediation(){
     alert();
