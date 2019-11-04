@@ -100,8 +100,20 @@ function shuffleDeck() {
 function gamePlay(){
     xPick(1);
     yPick(1);
-    var xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
-    var yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+    xCardValue = '';
+    xCardStatus.forEach(function(e){
+        let xScore = 0
+        xScore = parseInt((e.toString()).split("-",2)[1]);
+        var xCardValue = xScore;
+        return xCardValue;
+    })
+    yCardValue = '';
+    yCardStatus.forEach(function(e){
+        let yScore = 0
+        yScore = parseInt((e.toString()).split("-",2)[1]);
+        var yCardValue = yScore;
+        return yCardValue;
+    })
 
     if (xCardValue < yCardValue){
         xHand.push(Array.from(yCardStatus));
@@ -125,17 +137,6 @@ function gamePlay(){
 
 function invokeMediation(){
     alert();
-    // xPick(4);
-    // yPick(4);
-    // var xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
-    // var yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
-    // if (xCardValue < yCardValue){
-    //     xCardStatus.push(yCardStatus);
-    // }
-    // if (yCardValue < xCardValue){
-    //     yCardStatus.push(xCardStatus);
-    // }
-
 }
 
 function xPick(num){
@@ -151,10 +152,8 @@ function yPick(num){
 }    
 
 function checkForWin(){
-    if (yHand.length === 52){
-        statusMessage.textContent = "Player Y Wins!";
-    }
-    alert();
+    console.log(yHand.length)
+    console.log(xHand.length)
 }
 
 //render
