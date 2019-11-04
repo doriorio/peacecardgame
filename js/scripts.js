@@ -39,10 +39,10 @@ var statusMessage = document.getElementById('status-message')
 /*----- event listeners -----*/ 
 //first, click the fulldeck hold box to give both players half the deck
 fullStack.addEventListener('click',shuffleDeck);
-playerX.addEventListener('click',alert);
-playerY.addEventListener('click',alert);
-playerXCard.addEventListener('click',alert);
-playerYCard.addEventListener('click',alert);
+// playerX.addEventListener('click',alert);
+// playerY.addEventListener('click',alert);
+// playerXCard.addEventListener('click',alert);
+// playerYCard.addEventListener('click',alert);
 regularPlay.addEventListener('click',gamePlay);
 mediationPlay.addEventListener('click',invokeMediation);
 
@@ -102,22 +102,17 @@ function gamePlay(){
     yPick(1);
     var xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
     var yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+
     if (xCardValue < yCardValue){
-        xCardStatus.push("-" + yCardValue);
-        
-        yCardStatus.pop();
-        xCardStatus = xCardStatus.concat(xHand);
-        console.log(xCardStatus);
-        playerX.innerHTML = xCardStatus;
-        
+        xHand.push(Array.from(yCardStatus));
+        playerX.innerHTML = xHand.toString();
+
     }
     if (yCardValue < xCardValue){
-        yCardStatus.push(`- ${xCardValue}`);
-        xCardStatus.pop()
-        playerY.innerHTML = yHand.concat(yCardStatus);
-        yCardStatus = playerY.innerHTML;
-        // console.log(playerY.innerHTML);
+        yHand.push(Array.from(xCardStatus))
+        playerY.innerHTML = yHand.toString();
     }
+    
     else if (xCardValue === yCardValue){
         invokeMediation();
         console.log('mediation invoked');
@@ -145,19 +140,18 @@ function invokeMediation(){
 
 function xPick(num){
     playerXCard.innerHTML = xHand.splice(0,num);
-    playerX.innerHTML = xHand;
     xCardStatus.push(playerXCard.innerHTML);
+    playerX.innerHTML = xHand;
 }    
 function yPick(num){
     
     playerYCard.innerHTML = yHand.splice(0,num);
-    playerY.innerHTML = yHand;
     yCardStatus.push(playerYCard.innerHTML);
+    playerY.innerHTML = yHand;
 }    
 
 function checkForWin(){
-    var yCheck = playerY.innerHTML.toString().split('-');
-    if (yCheck.length === 52){
+    if (yHand.length === 52){
         statusMessage.textContent = "Player Y Wins!";
     }
     alert();
