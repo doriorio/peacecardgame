@@ -82,21 +82,20 @@ function gamePlay(){
     xPick(1);
     yPick(1);
     xCardValue = '';
-    xCardStatus.forEach(function(e){
-        xCardValue = parseInt((e.toString()).split("-",2)[1]);
-    })
+    xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
     yCardValue = '';
-    yCardStatus.forEach(function(e){
-        yCardValue = parseInt((e.toString()).split("-",2)[1]);
-    })
+    yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
     checkForWin();
     updateValues();
 }
 
 //ideally the innerHTML setting in x&yPick happens here eventually
 function updateValues(){
+
     playerX.innerHTML = xHand;
     playerY.innerHTML = yHand;
+
+
 }
 
 function xPick(num){
@@ -110,13 +109,18 @@ function yPick(num){
 }    
 
 function checkForWin(){
+
     if (xCardValue < yCardValue){
-        xHand.push(yCardStatus);
-        console.log(xHand + 'xhand');
-        console.log(yCardStatus + 'ycardstatus');
+        xHand.unshift(yCardStatus);
+        yCardStatus = yCardStatus.filter(function(yCard){
+            return yCard !== xHand[0]
+        })
     }
     if (yCardValue < xCardValue){
-        yHand.push(xCardStatus);
+        yHand.unshift(xCardStatus);
+        xCardStatus = xCardStatus.filter(function(xCard){
+            return xCard !== yHand[0]
+        })
     } 
     else if (xCardValue === yCardValue){
         invokeMediation();
