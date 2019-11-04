@@ -1,7 +1,7 @@
 /*----- constants -----*/ 
 
 var suits = ['s', 'c', 'd', 'h'];
-var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', '0J', '0Q', '0K', '0A'];
+var ranks = ['0A', '02', '03', '04', '05', '06', '07', '08', '09', '10', '0J', '0Q', '0K'];
 var fullDeck = [];
 suits.forEach(function(e){
     ranks.forEach(function(j,i){
@@ -35,14 +35,12 @@ var playerY = document.getElementById('playerY');
 var playerXCard = document.getElementById('playerXcard');
 var playerYCard = document.getElementById('playerYcard');
 var regularPlay = document.getElementById('temp-normal-play');
-var mediationPlay = document.getElementById('temp-mediation');
 var statusMessage = document.getElementById('status-message');
 
 
 /*----- event listeners -----*/ 
 fullStack.addEventListener('click',alert);
 regularPlay.addEventListener('click',gamePlay);
-mediationPlay.addEventListener('click',invokeMediation);
 
 /*----- functions -----*/
 //use this as a test function when setting up event listeners or as a placeholder
@@ -82,38 +80,45 @@ function shuffleDeck() {
 function gamePlay(){
     xPick(1);
     yPick(1);
-    // xCardValue = '';
     xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
-    // yCardValue = '';
     yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+    checkForVals();
+    render();
     checkForWin();
-    updateValues();
 }
 
 
 function xPick(num){
-    playerXCard.innerHTML = xHand.splice(0,num);
-    xCardStatus.unshift(playerXCard.innerHTML);
+    xCardStatus = xHand.splice(0,num);
+    playerXCard.innerHTML = xCardStatus;
+    console.log(xCardStatus)
+
+
+
+    // playerXCard.innerHTML = xHand.splice(0,num);
+
+
+
+    // xCardStatus.unshift(playerXCard.innerHTML);
+    console.log(xCardStatus);
 }    
 function yPick(num){
-    playerYCard.innerHTML = yHand.splice(0,num);
-    yCardStatus.unshift(playerYCard.innerHTML);
+    yCardStatus = yHand.splice(0,num);
+    playerYCard.innerHTML = yCardStatus;
+    console.log(yCardStatus)
+    // playerYCard.innerHTML = yHand.splice(0,num);
+    // yCardStatus.unshift(playerYCard.innerHTML);
 }    
 
-function checkForWin(){
-    console.log(xCardValue)
+function checkForVals(){
+    console.log(xCardValue);
+    console.log(yCardValue);
+    
     if (xCardValue < yCardValue){
-        // push the x and y status 
-        // then clear out the x and y card value and x&y status
         xHand.unshift(yCardStatus);
         xHand.unshift(xCardStatus);
         yCardStatus = [];
         xCardStatus = [];
-
-        // yHand = yHand.filter(function(yCard){
-        //     return yCard !== xHand[0]
-        // })
-        // delete yCardStatus[0];
     }
     if (yCardValue < xCardValue){
         yHand.unshift(xCardStatus);
@@ -122,27 +127,52 @@ function checkForWin(){
         yCardStatus = [];
     } 
     else if (xCardValue === yCardValue){
-        return;
+        xPick(4);
+        yPick(4);
+        if (xCardValue < yCardValue){
+            yCardStatus.forEach(function(arg1){
+                xHand.unshift(arg1);
+            })
+            xCardStatus.forEach(function(arg2){
+                xHand.unshift(arg2);
+            })
+            yCardStatus = [];
+            xCardStatus = [];
+        }
+        if (yCardValue < xCardValue){
+            xCardStatus.forEach(function(arg3){
+                yHand.unshift(arg3);
+            })
+            yCardStatus.forEach(function(arg4){
+                yHand.unshift(arg4);
+            })
+            yCardStatus = [];
+            xCardStatus = [];
+        } 
         
     }
     
 }
+
+
 //ideally the innerHTML setting in x&yPick happens here eventually
-function updateValues(){
+function render(){
     playerX.innerHTML = xHand;
     playerY.innerHTML = yHand;
-    // playerXCard.innerHTML = xCardStatus;
-    // playerYCard.innerHTML = yCardStatus;
+    playerXCard.innerHTML = xCardStatus;
+    playerYCard.innerHTML = yCardStatus;
 }
-function invokeMediation(){
-    alert();
+function checkForWin(){
+    if (xHand.length === 52){
+        statusMessage.textContent = 'player X ftw'
+    }
+    if (yHand.length === 52 ){
+        statusMessage.textContent = 'player Y ftw'
+    }
 }
+
 function init(){
     shuffleDeck();
-    
 }
 
 init();
-
-//render
-//init
