@@ -9,15 +9,7 @@ suits.forEach(function(e){
     })
 })
 
-// //add this later and make sure to add ace
-// suits.forEach(function(e){
-//     ranks.forEach(function(j){
-//      fullDeck.push(e+j);
-//     })
-// })
 
-//eventually, we need a players object so that the toggling between 
-//x and y functions can be done programmatically
 
 /*----- app's state (variables) -----*/ 
 
@@ -35,12 +27,15 @@ var playerY = document.getElementById('playerY');
 var playerXCard = document.getElementById('playerXcard');
 var playerYCard = document.getElementById('playerYcard');
 var regularPlay = document.getElementById('temp-normal-play');
+var mediationPlay = document.getElementById('mediation-play');
 var statusMessage = document.getElementById('status-message');
+var mediation = document.getElementById('mediation');
 
 
 /*----- event listeners -----*/ 
 fullStack.addEventListener('click',alert);
 regularPlay.addEventListener('click',gamePlay);
+mediationPlay.addEventListener('click',pickFour);
 
 /*----- functions -----*/
 //use this as a test function when setting up event listeners or as a placeholder
@@ -78,35 +73,30 @@ function shuffleDeck() {
 //by passing in an n that changes the xPick and yPick args
 //would need to iterater over the xCard and yCard values with a forEach to do so
 function gamePlay(){
-    xPick(1);
-    yPick(1);    
-    xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
-    
-    yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
-
+    pickOne()
+    render()
     checkForVals();
     clearRound();
     checkForWin();
 }
 
-
-function xPick(num){
-    if (num === 1){
-        xCardStatus = xHand.splice(0,num)[0];
-    } 
-    if (num === 4){
-        yCardStatus = yHand.splice(0,4);
-    }
-}    
-
-function yPick(num){
-    if (num === 1){
+function pickOne(){
+    xCardStatus = xHand.splice(0,1)[0];
     yCardStatus = yHand.splice(0,1)[0];
-    }
-    if (num === 4){
-        yCardStatus = yHand.splice(0,4);
-    }
-}    
+    xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
+    yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+}
+
+function pickFour(){
+    xCardStatus = xHand.splice(0,4);
+    console.log(xCardStatus + 'xcardstatus');
+    yCardStatus = yHand.splice(0,4);
+    console.log(yCardStatus + 'ycardstatus');
+    xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
+    yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+    checkForVals();
+}
+
 
 function checkForVals(){
 
@@ -120,26 +110,26 @@ function checkForVals(){
         yHand.push(yCardStatus);
 
     } 
-    else if (xCardValue === yCardValue){
-        xPick(4);
-        yPick(4);
+    else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){
+        alert();
+        mediation.classList.add('mediation-message');
+        mediationPlay.classList.add('time-to-mediate');
         if (xCardValue < yCardValue){
-            yCardStatus.forEach(function(arg1){
-                xHand.push(arg1);
-            })
-            xCardStatus.forEach(function(arg2){
-                xHand.push(arg2);
-            })
-            yCardStatus = [];
-            xCardStatus = [];
+            for (var i = 0; i<yCardStatus.length;i++){
+                xHand.push(yCardStatus[i]);
+            }
+            for (var i = 0; i<xCardStatus.length;i++){
+                xHand.push(xCardStatus[i]);
+            }
+
         }
         if (yCardValue < xCardValue){
-            xCardStatus.forEach(function(arg3){
-                yHand.push(arg3);
-            })
-            yCardStatus.forEach(function(arg4){
-                yHand.push(arg4);
-            })
+            for (var i = 0; i<xCardStatus.length;i++){
+                yHand.push(xCardStatus[i]);
+            }
+            for (var i = 0; i<yCardStatus.length;i++){
+                yHand.push(yCardStatus[i]);
+            }
         } else {
             console.log('edgecase')
         } 
@@ -150,13 +140,16 @@ function checkForVals(){
 
 
 //ideally the innerHTML setting in x&yPick happens here eventually
-function clearRound(){
+function render(){
     playerX.innerHTML = xHand;
     playerY.innerHTML = yHand;
     playerXCard.innerHTML = xCardStatus;
     playerYCard.innerHTML = yCardStatus;
-    yCardStatus = [];
-    xCardStatus = [];
+}
+
+function clearRound(){
+    yCardStatus = undefined;
+    xCardStatus = undefined;
 }
 function checkForWin(){
     if (xHand.length === 52){

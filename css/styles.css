@@ -17,7 +17,7 @@ font-family: 'Chathura', sans-serif; */
 
 }
 
-  .cell-1 {
+  .mediation-message {
     background-image: url(imgs/justice.png);
     background-size: contain;
     background-repeat: no-repeat;
@@ -29,6 +29,12 @@ h2 {
   text-align: center;
 
 }
+.time-to-mediate {
+  background-color: #4CAF50;
+  font-size: 16px;
+  color: white;
+}
+
 /* temporary */
 /* #full-deck-hold {
   overflow-wrap: break-word;
