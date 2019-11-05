@@ -17,7 +17,8 @@ var xHand = [];
 var yHand = [];
 var xCardStatus = [];
 var yCardStatus = [];
-let xCardValue, yCardValue;
+
+let xCardValue, yCardValue, xFour, yFour;
 
 /*----- cached element references -----*/ 
 
@@ -37,6 +38,7 @@ fullStack.addEventListener('click',alert);
 regularPlay.addEventListener('click',gamePlay);
 mediationPlay.addEventListener('click',pickFour);
 
+
 /*----- functions -----*/
 //use this as a test function when setting up event listeners or as a placeholder
 function alert(){
@@ -49,7 +51,7 @@ function shuffleDeck() {
     while (tempDeck.length) {
         var rndIdx = (Math.floor(Math.random() * tempDeck.length))
         shuffleAll.push(tempDeck.splice(rndIdx, 1)[0])
-        fullStack.innerHTML = shuffleAll;
+        
         }
     shuffleAll.forEach(function(card,i){
         if (i < 26) {
@@ -69,34 +71,65 @@ function shuffleDeck() {
 }
 
 
-//this is a little messy - later on this can be used for both mediation and for reg 
-//by passing in an n that changes the xPick and yPick args
-//would need to iterater over the xCard and yCard values with a forEach to do so
 function gamePlay(){
+    console.log(yHand.length);
+    console.log(xHand.length);
     pickOne()
-    render()
+    if (xCardStatus.length){
+        xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
+    }
+    if (yCardStatus){
+        yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+    }
     checkForVals();
-    clearRound();
-    checkForWin();
 }
 
 function pickOne(){
     xCardStatus = xHand.splice(0,1)[0];
     yCardStatus = yHand.splice(0,1)[0];
-    xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
-    yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+
 }
 
 function pickFour(){
-    xCardStatus = xHand.splice(0,4);
-    console.log(xCardStatus + 'xcardstatus');
-    yCardStatus = yHand.splice(0,4);
-    console.log(yCardStatus + 'ycardstatus');
-    xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
-    yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
-    checkForVals();
+    xFour = xHand.splice(0,4);
+    yFour = yHand.splice(0,4);
+    checkforMultVals();
 }
 
+
+function checkforMultVals(){
+    xCardValue = parseInt((xFour.toString()).split("-",2)[1]); 
+    yCardValue = parseInt((yFour.toString()).split("-",2)[1]);
+    if (xFour.length === 4 && yFour.length === 4){
+        if (xCardValue < yCardValue){
+            for (var i = 0; i<yFour.length;i++){
+                xHand.push(yFour[i]);
+
+            }
+            for (var i = 0; i<xFour.length;i++){
+                xHand.push(xFour[i]);
+         }
+            xHand.push(yCardStatus, xCardStatus);
+        }
+        if (yCardValue < xCardValue){
+            for (var i = 0; i<xFour.length;i++){
+                yHand.push(xFour[i]);
+
+            }
+            for (var i = 0; i<yFour.length;i++){
+                yHand.push(yFour[i]);
+
+
+            }
+            yHand.push(yCardStatus, xCardStatus);
+        }
+         else if (yCardValue === xCardValue) {
+            console.log('edgecase')
+            pickOne();
+            
+        } 
+    }
+}
 
 function checkForVals(){
 
@@ -111,31 +144,13 @@ function checkForVals(){
 
     } 
     else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){
-        alert();
+        pickFour();
         mediation.classList.add('mediation-message');
-        mediationPlay.classList.add('time-to-mediate');
-        if (xCardValue < yCardValue){
-            for (var i = 0; i<yCardStatus.length;i++){
-                xHand.push(yCardStatus[i]);
-            }
-            for (var i = 0; i<xCardStatus.length;i++){
-                xHand.push(xCardStatus[i]);
-            }
-
-        }
-        if (yCardValue < xCardValue){
-            for (var i = 0; i<xCardStatus.length;i++){
-                yHand.push(xCardStatus[i]);
-            }
-            for (var i = 0; i<yCardStatus.length;i++){
-                yHand.push(yCardStatus[i]);
-            }
-        } else {
-            console.log('edgecase')
-        } 
-        
+        mediationPlay.classList.add('time-to-mediate');   
     }
-    
+    render();
+    checkForWin();
+    clearRound();
 }
 
 
