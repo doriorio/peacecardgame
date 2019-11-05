@@ -79,75 +79,69 @@ function shuffleDeck() {
 //would need to iterater over the xCard and yCard values with a forEach to do so
 function gamePlay(){
     xPick(1);
-    yPick(1);
+    yPick(1);    
     xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]);
+    
     yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+
     checkForVals();
-    render();
+    clearRound();
     checkForWin();
 }
 
 
 function xPick(num){
-    xCardStatus = xHand.splice(0,num);
-    playerXCard.innerHTML = xCardStatus;
-    console.log(xCardStatus)
-
-
-
-    // playerXCard.innerHTML = xHand.splice(0,num);
-
-
-
-    // xCardStatus.unshift(playerXCard.innerHTML);
-    console.log(xCardStatus);
+    if (num === 1){
+        xCardStatus = xHand.splice(0,num)[0];
+    } 
+    if (num === 4){
+        yCardStatus = yHand.splice(0,4);
+    }
 }    
+
 function yPick(num){
-    yCardStatus = yHand.splice(0,num);
-    playerYCard.innerHTML = yCardStatus;
-    console.log(yCardStatus)
-    // playerYCard.innerHTML = yHand.splice(0,num);
-    // yCardStatus.unshift(playerYCard.innerHTML);
+    if (num === 1){
+    yCardStatus = yHand.splice(0,1)[0];
+    }
+    if (num === 4){
+        yCardStatus = yHand.splice(0,4);
+    }
 }    
 
 function checkForVals(){
-    console.log(xCardValue);
-    console.log(yCardValue);
-    
+
     if (xCardValue < yCardValue){
-        xHand.unshift(yCardStatus);
-        xHand.unshift(xCardStatus);
-        yCardStatus = [];
-        xCardStatus = [];
+        xHand.push(yCardStatus);
+        xHand.push(xCardStatus);
+
     }
     if (yCardValue < xCardValue){
-        yHand.unshift(xCardStatus);
-        yHand.unshift(yCardStatus);
-        xCardStatus = [];
-        yCardStatus = [];
+        yHand.push(xCardStatus);
+        yHand.push(yCardStatus);
+
     } 
     else if (xCardValue === yCardValue){
         xPick(4);
         yPick(4);
         if (xCardValue < yCardValue){
             yCardStatus.forEach(function(arg1){
-                xHand.unshift(arg1);
+                xHand.push(arg1);
             })
             xCardStatus.forEach(function(arg2){
-                xHand.unshift(arg2);
+                xHand.push(arg2);
             })
             yCardStatus = [];
             xCardStatus = [];
         }
         if (yCardValue < xCardValue){
             xCardStatus.forEach(function(arg3){
-                yHand.unshift(arg3);
+                yHand.push(arg3);
             })
             yCardStatus.forEach(function(arg4){
-                yHand.unshift(arg4);
+                yHand.push(arg4);
             })
-            yCardStatus = [];
-            xCardStatus = [];
+        } else {
+            console.log('edgecase')
         } 
         
     }
@@ -156,11 +150,13 @@ function checkForVals(){
 
 
 //ideally the innerHTML setting in x&yPick happens here eventually
-function render(){
+function clearRound(){
     playerX.innerHTML = xHand;
     playerY.innerHTML = yHand;
     playerXCard.innerHTML = xCardStatus;
     playerYCard.innerHTML = yCardStatus;
+    yCardStatus = [];
+    xCardStatus = [];
 }
 function checkForWin(){
     if (xHand.length === 52){
