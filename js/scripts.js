@@ -24,7 +24,6 @@ var playerY = document.getElementById('playerY');
 var playerXCard = document.getElementById('playerXcard');
 var playerYCard = document.getElementById('playerYcard');
 var regularPlay = document.getElementById('normal-play');
-var mediationPlay = document.getElementById('mediation-message');
 var statusMessage = document.getElementById('status-message');
 var mediation = document.getElementById('mediation');
 
@@ -63,10 +62,7 @@ function shuffleDeck() {
 
 
 function gamePlay(){
-    console.log(yHand.length + xHand.length);
-    if(yHand.length+xHand.length<52){
-        alert("going wrong!");
-    }
+    statusMessage.textContent = '';
     pickOne()
     checkForVals();
     render();
@@ -83,7 +79,6 @@ function pickOne(){
 }
 
 
-
 function checkForVals(){
     
     if (xCardValue < yCardValue){
@@ -92,25 +87,22 @@ function checkForVals(){
     if (yCardValue < xCardValue){
         yHand.push(xCardStatus,yCardStatus);
     } 
-    else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){
+    else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){   
         pickFour();
-        //this will then pick 4, which checks multvals, 
-        mediation.classList.add('mediation-message');
-        mediationPlay.classList.add('time-to-mediate');   
+
     }
 }
 
+//for the pick
+
 function pickFour(){
+    statusMessage.textContent = 'Mediation!'
+    console.log('hitpickfour')
     xFour = xHand.splice(0,4);
     yFour = yHand.splice(0,4);
-    // xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
     xCardValue = parseInt((xFour.toString()).split("-",2)[1]); 
-    console.log(xCardStatus +'status');
-    console.log(xCardValue + 'value');
-    // yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
     yCardValue = parseInt((yFour.toString()).split("-",2)[1]);
-    console.log(yCardValue + 'value');
-    console.log(yCardStatus + 'status');
+
     checkforMultVals();
 }
 function checkforMultVals(){
@@ -134,7 +126,6 @@ function checkforMultVals(){
             yHand.push(yCardStatus, xCardStatus);
         }
          if (yCardValue === xCardValue) {
-             console.log("ENOUGH FIGHTING");
 
              houseRules();
 
@@ -143,8 +134,7 @@ function checkforMultVals(){
 }
 
 function houseRules(){
-//remember you need to get both xFour, yFour and the cardstatuses
-
+    statusMessage.textContent = "Enough arguing! The least combative suit will win this round. "
     let ranks = {'h':0, 'd':1, 's':2, 'c':3};
     var houseyCardValue = ranks[yFour[0].charAt(0)];
     var housexCardValue = ranks[xFour[0].charAt(0)];
@@ -189,7 +179,9 @@ function render(){
 function clearRound(){
     yCardStatus = undefined;
     xCardStatus = undefined;
+    mediation.classList.remove('mediation');   
 
+    mediation.classList.add('normal');
 
 }
 

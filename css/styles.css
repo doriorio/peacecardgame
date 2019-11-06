@@ -1,9 +1,18 @@
 /* other font in the google stylesheet
 font-family: 'Chathura', sans-serif; */
 
+#game {
+  font-family: 'Chathura', sans-serif;
+  text-align: center;
+  font-size: 1.25rem;
+
+
+}
+
 .container {
     display: grid;
-    
+    justify-content: center;
+    align-content: center;
     grid-template-columns: 300px 200px 200px; 
     grid-template-rows: 1fr 1fr; 
     row-gap: 10px;
@@ -11,17 +20,18 @@ font-family: 'Chathura', sans-serif; */
   }
 
 .container .cell {
+
     height: 200px;
     /* overflow-wrap: break-word; */
     background-color: mediumaquamarine;
 
 }
 
-  .mediation-message {
-    background-image: url(imgs/justice.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
+.mediation-img {
+  background-image: url(imgs/justice.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 
 h2 {
@@ -29,14 +39,20 @@ h2 {
   text-align: center;
 
 }
-.time-to-mediate {
-  background-color: #4CAF50;
-  font-size: 16px;
-  color: white;
-}
 
-/* temporary */
-/* #full-deck-hold {
-  overflow-wrap: break-word;
-  width: 400px;
-} */
+
+#normal-play {
+  grid-column: 1 / span 3;
+  outline: none;
+  background-color: #7628DB;
+  color: white;
+  height: 2rem;
+
+}
+.normal {
+  background-image: url(imgs/peace.png);
+  background-position: center; 
+  background-color: mediumaquamarine;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
