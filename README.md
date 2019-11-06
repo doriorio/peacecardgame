@@ -15,6 +15,10 @@ The Arena | Player 1 | Player 2 |
 ### The Rules
 WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
 
+### Technologies used
+Vanilla JS, HTML, CSS
+
+
 ## Pseudocode
 ----
 

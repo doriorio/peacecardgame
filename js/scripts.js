@@ -9,41 +9,32 @@ suits.forEach(function(e){
     })
 })
 
-
-
 /*----- app's state (variables) -----*/ 
 
 var xHand = [];
 var yHand = [];
 var xCardStatus = [];
 var yCardStatus = [];
-
 let xCardValue, yCardValue, xFour, yFour;
 
 /*----- cached element references -----*/ 
 
-var fullStack = document.getElementById('full-deck-hold');
 var playerX = document.getElementById('playerX');
 var playerY = document.getElementById('playerY');
 var playerXCard = document.getElementById('playerXcard');
 var playerYCard = document.getElementById('playerYcard');
-var regularPlay = document.getElementById('temp-normal-play');
-var mediationPlay = document.getElementById('mediation-play');
+var regularPlay = document.getElementById('normal-play');
+var mediationPlay = document.getElementById('mediation-message');
 var statusMessage = document.getElementById('status-message');
 var mediation = document.getElementById('mediation');
 
 
 /*----- event listeners -----*/ 
-fullStack.addEventListener('click',alert);
 regularPlay.addEventListener('click',gamePlay);
-mediationPlay.addEventListener('click',pickFour);
+
 
 
 /*----- functions -----*/
-//use this as a test function when setting up event listeners or as a placeholder
-function alert(){
-    console.log('placeholder function');
-}
 
 function shuffleDeck() {
     var tempDeck = fullDeck.slice();
@@ -72,39 +63,61 @@ function shuffleDeck() {
 
 
 function gamePlay(){
-    console.log(yHand.length);
-    console.log(xHand.length);
+    console.log(yHand.length + xHand.length);
+    if(yHand.length+xHand.length<52){
+        alert("going wrong!");
+    }
     pickOne()
-    if (xCardStatus.length){
-        xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
-    }
-    if (yCardStatus){
-        yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
-    }
     checkForVals();
+    render();
+    checkForWin();
+    clearRound();
 }
 
 function pickOne(){
     xCardStatus = xHand.splice(0,1)[0];
     yCardStatus = yHand.splice(0,1)[0];
+    xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
+    yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+    
+}
 
+
+
+function checkForVals(){
+    
+    if (xCardValue < yCardValue){
+        xHand.push(yCardStatus,xCardStatus);
+    }
+    if (yCardValue < xCardValue){
+        yHand.push(xCardStatus,yCardStatus);
+    } 
+    else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){
+        pickFour();
+        //this will then pick 4, which checks multvals, 
+        mediation.classList.add('mediation-message');
+        mediationPlay.classList.add('time-to-mediate');   
+    }
 }
 
 function pickFour(){
     xFour = xHand.splice(0,4);
     yFour = yHand.splice(0,4);
+    // xCardValue = parseInt((xCardStatus.toString()).split("-",2)[1]); 
+    xCardValue = parseInt((xFour.toString()).split("-",2)[1]); 
+    console.log(xCardStatus +'status');
+    console.log(xCardValue + 'value');
+    // yCardValue = parseInt((yCardStatus.toString()).split("-",2)[1]);
+    yCardValue = parseInt((yFour.toString()).split("-",2)[1]);
+    console.log(yCardValue + 'value');
+    console.log(yCardStatus + 'status');
     checkforMultVals();
 }
-
-
 function checkforMultVals(){
-    xCardValue = parseInt((xFour.toString()).split("-",2)[1]); 
-    yCardValue = parseInt((yFour.toString()).split("-",2)[1]);
     if (xFour.length === 4 && yFour.length === 4){
         if (xCardValue < yCardValue){
             for (var i = 0; i<yFour.length;i++){
                 xHand.push(yFour[i]);
-
             }
             for (var i = 0; i<xFour.length;i++){
                 xHand.push(xFour[i]);
@@ -114,44 +127,54 @@ function checkforMultVals(){
         if (yCardValue < xCardValue){
             for (var i = 0; i<xFour.length;i++){
                 yHand.push(xFour[i]);
-
             }
             for (var i = 0; i<yFour.length;i++){
                 yHand.push(yFour[i]);
-
-
             }
             yHand.push(yCardStatus, xCardStatus);
         }
-         else if (yCardValue === xCardValue) {
-            console.log('edgecase')
-            pickOne();
-            
+         if (yCardValue === xCardValue) {
+             console.log("ENOUGH FIGHTING");
+
+             houseRules();
+
         } 
     }
 }
 
-function checkForVals(){
+function houseRules(){
+//remember you need to get both xFour, yFour and the cardstatuses
 
-    if (xCardValue < yCardValue){
-        xHand.push(yCardStatus);
-        xHand.push(xCardStatus);
+    let ranks = {'h':0, 'd':1, 's':2, 'c':3};
+    var houseyCardValue = ranks[yFour[0].charAt(0)];
+    var housexCardValue = ranks[xFour[0].charAt(0)];
 
+    if (houseyCardValue < housexCardValue){
+        yHand.push(xCardStatus,yCardStatus);
+        for (var i = 0; i<xFour.length;i++){
+            yHand.push(xFour[i]);
+
+        }
+        for (var i = 0; i<yFour.length;i++){
+            yHand.push(yFour[i]);
+
+        }
     }
-    if (yCardValue < xCardValue){
-        yHand.push(xCardStatus);
-        yHand.push(yCardStatus);
 
-    } 
-    else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){
-        pickFour();
-        mediation.classList.add('mediation-message');
-        mediationPlay.classList.add('time-to-mediate');   
+    if (housexCardValue < houseyCardValue){
+        xHand.push(xCardStatus,yCardStatus);
+        for (var i = 0; i<xFour.length;i++){
+            xHand.push(xFour[i]);
+
+        }
+        for (var i = 0; i<yFour.length;i++){
+            xHand.push(yFour[i]);
+
+        }
     }
-    render();
-    checkForWin();
-    clearRound();
+
 }
+
 
 
 //ideally the innerHTML setting in x&yPick happens here eventually
@@ -160,18 +183,24 @@ function render(){
     playerY.innerHTML = yHand;
     playerXCard.innerHTML = xCardStatus;
     playerYCard.innerHTML = yCardStatus;
+
 }
 
 function clearRound(){
     yCardStatus = undefined;
     xCardStatus = undefined;
+
+
 }
+
 function checkForWin(){
-    if (xHand.length === 52){
-        statusMessage.textContent = 'player X ftw'
-    }
-    if (yHand.length === 52 ){
+    if (xHand.length === 0){
         statusMessage.textContent = 'player Y ftw'
+        regularPlay.removeEventListener("click", gamePlay);
+    }
+    if (yHand.length === 0 ){
+        statusMessage.textContent = 'player X ftw'
+        regularPlay.removeEventListener("click", gamePlay);
     }
 }
 
