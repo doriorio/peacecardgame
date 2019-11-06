@@ -49,13 +49,13 @@ function shuffleDeck() {
                 return;
             }
             xHand.push(card);
-            playerX.innerHTML = xHand;
+            // playerX.innerHTML = xHand;
         } if (i >= 26) {
             if (yHand.length === 26) {
                 return;
             }
             yHand.push(card);
-            playerY.innerHTML = yHand;
+            // playerY.innerHTML = yHand;
         }
     })
 }
@@ -169,14 +169,17 @@ function houseRules(){
 
 //ideally the innerHTML setting in x&yPick happens here eventually
 function render(){
+    // this will need logic for displaying xFour and yFour for those cases
     //
-        playerXCard.innerHTML = xFour;
-        playerYCard.innerHTML = yFour;
-    //
-        playerX.innerHTML = xHand;
-        playerY.innerHTML = yHand;
+        // playerX.innerHTML = xHand;
+        // playerY.innerHTML = yHand;
+        playerX.classList.add('cardbackX');
+        playerY.classList.add('cardbackY');
+
         playerXCard.innerHTML = xCardStatus;
         playerYCard.innerHTML = yCardStatus;
+        // playerXCard.innerHTML = xFour;
+        // playerYCard.innerHTML = yFour;
     //
 }
 
@@ -193,10 +196,12 @@ function checkForWin(){
     if (xHand.length === 0){
         statusMessage.textContent = 'player Y ftw'
         regularPlay.removeEventListener("click", gamePlay);
+        //make the xHand HTML empty
     }
     if (yHand.length === 0 ){
         statusMessage.textContent = 'player X ftw'
         regularPlay.removeEventListener("click", gamePlay);
+        //make the yHand HTML empty
     }
 }
 

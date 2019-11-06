@@ -23,7 +23,7 @@ font-family: 'Chathura', sans-serif; */
 
     height: 200px;
     /* overflow-wrap: break-word; */
-    background-color: mediumaquamarine;
+    /* background-color: mediumaquamarine; */
 
 }
 
@@ -56,3 +56,19 @@ h2 {
   background-size: contain;
   background-repeat: no-repeat;
 }
+  
+  .cardbackY {
+    background-image: url(imgs/playingcardbackY.jpg);
+    background-position: center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+  }
+
+  .cardbackX {
+    background-image: url(imgs/playingcardbackX.jpg);
+    background-position: center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+  }
