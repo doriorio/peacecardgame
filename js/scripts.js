@@ -25,7 +25,9 @@ var playerXCard = document.getElementById('playerXcard');
 var playerYCard = document.getElementById('playerYcard');
 var regularPlay = document.getElementById('normal-play');
 var statusMessage = document.getElementById('status-message');
+var housestatusMessage = document.getElementById('houserules-status-message');
 var mediation = document.getElementById('mediation');
+var dynamicImage = document.getElementById('image-hold');
 
 
 /*----- event listeners -----*/ 
@@ -60,14 +62,14 @@ function shuffleDeck() {
     })
 }
 
-
+//think about moving clearround up ????????
 function gamePlay(){
-    statusMessage.textContent = '';
+    clearRound();
+
     pickOne()
     checkForVals();
     render();
     checkForWin();
-    clearRound();
 }
 
 function pickOne(){
@@ -93,7 +95,7 @@ function checkForVals(){
     }
 }
 
-//for the pick
+
 
 function pickFour(){
     statusMessage.textContent = 'Mediation!'
@@ -102,9 +104,12 @@ function pickFour(){
     yFour = yHand.splice(0,4);
     xCardValue = parseInt((xFour.toString()).split("-",2)[1]); 
     yCardValue = parseInt((yFour.toString()).split("-",2)[1]);
-
+    dynamicImage.classList.add('mediation-img');
     checkforMultVals();
 }
+
+
+
 function checkforMultVals(){
     if (xFour.length === 4 && yFour.length === 4){
         if (xCardValue < yCardValue){
@@ -127,14 +132,17 @@ function checkforMultVals(){
         }
          if (yCardValue === xCardValue) {
 
-             houseRules();
+            setTimeout(houseRules, 1000);
 
         } 
     }
 }
 
+
+
+//need a set time out here
 function houseRules(){
-    statusMessage.textContent = "Enough arguing! The least combative suit will win this round."
+    housestatusMessage.textContent = "Enough arguing! The least combative suit will win this round."
     let ranks = {'h':0, 'd':1, 's':2, 'c':3};
     var houseyCardValue = ranks[yFour[0].charAt(0)];
     var housexCardValue = ranks[xFour[0].charAt(0)];
@@ -169,27 +177,24 @@ function houseRules(){
 
 //ideally the innerHTML setting in x&yPick happens here eventually
 function render(){
-    // this will need logic for displaying xFour and yFour for those cases
-    //
-        // playerX.innerHTML = xHand;
-        // playerY.innerHTML = yHand;
+
         playerX.classList.add('cardbackX');
         playerY.classList.add('cardbackY');
+        if (yFour !== undefined){
+            playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xCardStatus}.svg')`;
+            playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yCardStatus}.svg')`;        
+        }
 
-        playerXCard.innerHTML = xCardStatus;
-        playerYCard.innerHTML = yCardStatus;
-        // playerXCard.innerHTML = xFour;
-        // playerYCard.innerHTML = yFour;
-    //
 }
 
 function clearRound(){
     yCardStatus = undefined;
     xCardStatus = undefined;
-    mediation.classList.remove('mediation');   
-
     mediation.classList.add('normal');
-
+    mediation.textContent = '';
+    dynamicImage.classList.remove('mediation-img');
+    housestatusMessage.textContent = '';
+    statusMessage.textContent = '';
 }
 
 function checkForWin(){

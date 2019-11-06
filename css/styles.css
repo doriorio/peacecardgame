@@ -1,10 +1,21 @@
 /* other font in the google stylesheet
 font-family: 'Chathura', sans-serif; */
 
+body {
+  background-color: black;
+  background-position: center; 
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 #game {
   font-family: 'Chathura', sans-serif;
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 2rem;
+  border: 1px solid black;
+  padding: 4px;
+  background-color: white;
+  margin: 20px;
 
 
 }
@@ -17,14 +28,23 @@ font-family: 'Chathura', sans-serif; */
     grid-template-rows: 1fr 1fr; 
     row-gap: 10px;
     column-gap: 10px;
+    align-content: space-between;
   }
+  
+  .container .cell {
+    
+    height: 190px;
+    width: 135px;
+    border: 3px solid black;
+    background-size: contain;
+    box-shadow: 3px 3px 3px grey;
 
-.container .cell {
 
-    height: 200px;
-    /* overflow-wrap: break-word; */
-    /* background-color: mediumaquamarine; */
+}
 
+#gamestatus, #image-hold {
+  border: none;
+  box-shadow: 0 0 0 white;
 }
 
 .mediation-img {
@@ -33,10 +53,15 @@ font-family: 'Chathura', sans-serif; */
   background-repeat: no-repeat;
 }
 
+h3 {
+  height: 25px;
+}
 
 h2 {
+  font-weight: bold;
   font-family: 'Srisakdi', cursive;
   text-align: center;
+  color: white;
 
 }
 
@@ -52,23 +77,30 @@ h2 {
 .normal {
   background-image: url(imgs/peace.png);
   background-position: center; 
-  background-color: mediumaquamarine;
+
   background-size: contain;
   background-repeat: no-repeat;
 }
   
-  .cardbackY {
-    background-image: url(imgs/playingcardbackY.jpg);
-    background-position: center; 
-    background-size: contain;
-    background-repeat: no-repeat;
-    
+.cardbackY {
+  background-image: url(imgs/playingcardbackY.jpg);
+  background-position: center; 
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+}
+
+.cardbackX {
+  background-image: url(imgs/playingcardbackX.jpg);
+  background-position: center; 
+  background-size: contain;
+  background-repeat: no-repeat;
+  
   }
 
-  .cardbackX {
-    background-image: url(imgs/playingcardbackX.jpg);
-    background-position: center; 
-    background-size: contain;
-    background-repeat: no-repeat;
-    
-  }
+.arrow {
+  background-image: url(imgs/arrow.png);
+  background-position: center; 
+  background-size: contain;
+  background-repeat: no-repeat;
+}
