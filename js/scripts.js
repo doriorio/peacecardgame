@@ -97,7 +97,7 @@ function checkForVals(){
 
 function pickFour(){
     statusMessage.textContent = 'Mediation!'
-    console.log('hitpickfour')
+
     xFour = xHand.splice(0,4);
     yFour = yHand.splice(0,4);
     xCardValue = parseInt((xFour.toString()).split("-",2)[1]); 
@@ -134,7 +134,7 @@ function checkforMultVals(){
 }
 
 function houseRules(){
-    statusMessage.textContent = "Enough arguing! The least combative suit will win this round. "
+    statusMessage.textContent = "Enough arguing! The least combative suit will win this round."
     let ranks = {'h':0, 'd':1, 's':2, 'c':3};
     var houseyCardValue = ranks[yFour[0].charAt(0)];
     var housexCardValue = ranks[xFour[0].charAt(0)];
@@ -169,11 +169,15 @@ function houseRules(){
 
 //ideally the innerHTML setting in x&yPick happens here eventually
 function render(){
-    playerX.innerHTML = xHand;
-    playerY.innerHTML = yHand;
-    playerXCard.innerHTML = xCardStatus;
-    playerYCard.innerHTML = yCardStatus;
-
+    //
+        playerXCard.innerHTML = xFour;
+        playerYCard.innerHTML = yFour;
+    //
+        playerX.innerHTML = xHand;
+        playerY.innerHTML = yHand;
+        playerXCard.innerHTML = xCardStatus;
+        playerYCard.innerHTML = yCardStatus;
+    //
 }
 
 function clearRound(){
