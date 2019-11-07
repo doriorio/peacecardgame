@@ -4,13 +4,7 @@
 
 ## Wireframe
 
-
-The Arena | Player 1 | Player 2 | 
-| ----------- | ----------- | ----------- |
-| :v: (where mediation happens)| :black_joker: | :black_joker: |
-| :black_square_button: (where regular gameplay happens) | n = 26 | n = 26|
-:alarm_clock: (clock counts down 3,2,1 every turn)
-
+![] (css/imgs/wireframe.png)
 
 ### The Rules
 WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
