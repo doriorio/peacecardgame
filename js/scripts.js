@@ -134,7 +134,7 @@ function checkforMultVals(){
             winMessage.textContent = "Player Y wins this round of mediation."
         }
          if (yCardValue === xCardValue) {
-            setTimeout(houseRules, 1000);
+            houseRules();
         } 
     }
 }
@@ -166,8 +166,8 @@ function yPush(){
 //need a set time out here
 function houseRules(){
     let ranks = {'h':0, 'd':1, 's':2, 'c':3};
-    var houseyCardValue = ranks[yFour[0].charAt(0)];
-    var housexCardValue = ranks[xFour[0].charAt(0)];
+    var houseyCardValue = ranks[yFour[0]];
+    var housexCardValue = ranks[xFour[0]];
     if (houseyCardValue < housexCardValue){
         yPush();
         winMessage.textContent = "Enough arguing! The least combative suit - Player Y's- will win this round."
@@ -233,7 +233,8 @@ function checkForWin(){
         winMessage.textContent = 'Player Y Wins!'
         regularPlay.removeEventListener("click", gamePlay);
         playerX.classList.remove('cardbackX','cell','cell-3','container');
-
+        playerYMediation.classList.remove('cardbackMediate');
+        playerXMediation.classList.remove('cardbackMediate');
         playerX.classList.add('removeborder');
         regularPlay.style.display = 'none';
         gameStatusMessage.textContent = "Don't worry Player X, just hit Reset and try again";
@@ -244,7 +245,8 @@ function checkForWin(){
         winMessage.textContent = 'Player X Wins!'
         regularPlay.removeEventListener("click", gamePlay);
         playerY.classList.remove('cardbackY','cell','cell-3','container');
-
+        playerYMediation.classList.remove('cardbackMediate');
+        playerXMediation.classList.remove('cardbackMediate');
         playerY.classList.add('removeborder');
         regularPlay.style.display = 'none';
         gameStatusMessage.textContent = "Don't worry Player Y, just hit Reset and try again";

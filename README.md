@@ -26,49 +26,41 @@ Vanilla JS, HTML, CSS
 ## Init, state, tracked vars
 
 ```
-//Setup - state variables: turn, score, cardsPerPlayer
-
-//Setup - global variables: n = 52, playerIndex
-
-//The game initializes and....
-
-//// The deck of n = 52 is shuffled and half of the deck is assigned to each player
-
-////The score is 0
-
-
-
-
-//A countdown displays and if there are two clicks (one per player) on the arena, the click listener is activated
+//Initializing shuffles the deck - this only happens once
+//Declare Xhand, Yhand as empty variables
+//Declare x & y scores as empty variables
 
 ```
 ## Click Listener
 ```
 
-
-//Looks at the value of both cards and compares (this will be programmatically generated based on  card number)
-
-////If one is higher than the other then both cards are collected
-
-///// If they are the same value, _mediation_ begins
+//Play button - gets removed in a win condition
+//Reset button
 
 ```
+## Regular Gameplay
+``` 
+//A card is dealt by splicing it out of the X or Y hand
+//That value is read by parsing the integer out of the card name
+//Whoever has the lower value gets both cards
+``` 
+
+
+
 ## Mediation 
 ``` 
 
-// Both characters get three cards that go on their side of the "arena" - then they flip over a fourth card and whoever has the lowest value (the "peace" variation) wins all 10 cards (original 2 + )
+// Both characters get four more cards that go on their side of the "arena" - then they flip over the fourth card and whoever has the lowest value (the "peace" variation) wins all 10 cards (original 2 + )
 
-////
-_if_ there aren't enough cards for all for the mediation requirements, they can use whatever they have left
+//// if mediation inside of mediation, invoke House Rules - the least violent suit gets the cards
 
 ``` 
+
+
 
 ## Check for win
 ``` 
-
-////When a player has all 52 cards, they win
-
-////if not keep going? (Mental note to look into other scenarios)
+//When someone's hand is empty, the other person wins
 ``` 
 
 ## Wishlist
