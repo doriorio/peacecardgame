@@ -3,8 +3,7 @@
 body {
   background-color: black;
   background-position: center; 
-  /* background-size: contain;
-  background-repeat: no-repeat; */
+  line-height: 1;
 }
 
 #game {
@@ -119,4 +118,12 @@ button {
   background-position: center; 
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+#gameplay-status-message {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8px;
+
+ 
 }

@@ -14,6 +14,13 @@ The Arena | Player 1 | Player 2 |
 
 ### The Rules
 WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
+## Houserules
+-The lower scoring player gets all the cards ('peace' spin)
+-War is called 'mediation'
+-We don't like excessive fighting; rather than mediate recursively - in the instance that mediation is entered and the cards are equal, the more 'peaceful' suit gets the cards 
+--Houserules suits scoring: hearts = 0, diamonds = 1, spades = 2, clubs = 3
+
+
 
 ### Technologies used
 Vanilla JS, HTML, CSS

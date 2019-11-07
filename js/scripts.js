@@ -32,7 +32,7 @@ var regularPlay = document.getElementById('normal-play');
 
 //Dynamic Elements
 var statusMessage = document.getElementById('status-message');
-var housestatusMessage = document.getElementById('houserules-status-message');
+var gameStatusMessage = document.getElementById('gameplay-status-message');
 var mediation = document.getElementById('mediation');
 var dynamicImage = document.getElementById('image-hold');
 var winMessage = document.getElementById('titlemessage');
@@ -184,18 +184,33 @@ function houseRules(){
 
 //ideally the innerHTML setting in x&yPick happens here eventually
 function render(){
-    playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xCardStatus}.svg')`;
-    playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yCardStatus}.svg')`;        
+    if (yFour == undefined) {
+        playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xCardStatus}.svg')`;
+        playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yCardStatus}.svg')`;        
+
+
+    }
+    
 
     if (yFour !== undefined){
         console.log(yFour);
+        playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xFour[0]}.svg')`;
+        playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yFour[0]}.svg')`;
         playerYMediation.classList.add('cardbackMediate');
         playerXMediation.classList.add('cardbackMediate');
     }
+
 }
 
 function clearRound(){
     winMessage.textContent = "✌️Peace: An Amicable Game ✌️";
+    if (yHand > xHand){
+        gameStatusMessage.textContent = "Not that it's a contest, but Player Y is in the lead";
+
+    }
+    if (xHand > yHand){
+        gameStatusMessage.textContent = "Not that it's a contest, but Player X is in the lead";
+    }
     yFour = undefined;
     xFour = undefined;
     yCardStatus = undefined;
@@ -203,7 +218,7 @@ function clearRound(){
     // mediation.classList.add('normal');
     mediation.textContent = '';
     dynamicImage.classList.remove('mediation-img');
-    housestatusMessage.textContent = '';
+
     statusMessage.textContent = '';
     playerYMediation.classList.add('removeborder');
     playerYMediation.classList.remove('cardbackMediate');
@@ -238,6 +253,7 @@ function init(){
     shuffleDeck();
     playerX.classList.add('cardbackX');
     playerY.classList.add('cardbackY');
+    gameStatusMessage.textContent = '';
 }
 
 
