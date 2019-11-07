@@ -28,6 +28,8 @@ var statusMessage = document.getElementById('status-message');
 var housestatusMessage = document.getElementById('houserules-status-message');
 var mediation = document.getElementById('mediation');
 var dynamicImage = document.getElementById('image-hold');
+var winMessage = document.getElementById('titlemessage');
+
 
 
 /*----- event listeners -----*/ 
@@ -65,7 +67,6 @@ function shuffleDeck() {
 //think about moving clearround up ????????
 function gamePlay(){
     clearRound();
-
     pickOne()
     checkForVals();
     render();
@@ -177,14 +178,18 @@ function houseRules(){
 
 //ideally the innerHTML setting in x&yPick happens here eventually
 function render(){
+    playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xCardStatus}.svg')`;
+    playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yCardStatus}.svg')`;        
+    // playerX.classList.add('cardbackX');
+    // playerY.classList.add('cardbackY');
+    if (yFour == undefined){
 
-        playerX.classList.add('cardbackX');
-        playerY.classList.add('cardbackY');
-        if (yFour !== undefined){
-            playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xCardStatus}.svg')`;
-            playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yCardStatus}.svg')`;        
-        }
-
+    }
+    if (yFour !== undefined){
+        playerXCard.textContent = '+3' ;
+        playerYCard.textContent = '+3' ;
+       
+    }
 }
 
 function clearRound(){
@@ -199,19 +204,28 @@ function clearRound(){
 
 function checkForWin(){
     if (xHand.length === 0){
-        statusMessage.textContent = 'player Y ftw'
+        winMessage.textContent = 'player Y ftw'
         regularPlay.removeEventListener("click", gamePlay);
+        playerX.classList.remove('cardbackX');
+        playerX.classList.add('removeborder');
+        
         //make the xHand HTML empty
     }
     if (yHand.length === 0 ){
-        statusMessage.textContent = 'player X ftw'
+        winMessage.textContent = 'player X ftw'
         regularPlay.removeEventListener("click", gamePlay);
+        playerY.classList.remove('cardbackY');
+        playerY.classList.remove('container');
+        playerY.classList.add('removeborder');
+        
         //make the yHand HTML empty
     }
 }
 
 function init(){
     shuffleDeck();
+    playerX.classList.add('cardbackX');
+    playerY.classList.add('cardbackY');
 }
 
 init();

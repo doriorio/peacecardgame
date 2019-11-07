@@ -31,18 +31,23 @@ body {
     align-content: space-between;
   }
   
-  .container .cell {
-    
-    height: 190px;
-    width: 135px;
-    border: 3px solid black;
-    background-size: contain;
-    box-shadow: 3px 3px 3px grey;
+.container .cell {
+  
+  height: 190px;
+  width: 135px;
+  border: 3px solid black;
+  background-size: contain;
+  box-shadow: 3px 3px 3px grey;
 
 
 }
 
-#gamestatus, #image-hold {
+#image-hold, #gamestatus {
+  border: none;
+  box-shadow: 0 0 0 white;
+}
+
+.removeborder {
   border: none;
   box-shadow: 0 0 0 white;
 }
