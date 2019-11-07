@@ -18,24 +18,33 @@ var yCardStatus = [];
 let xCardValue, yCardValue, xFour, yFour;
 
 /*----- cached element references -----*/ 
-
+//X & Y "Hands"
 var playerX = document.getElementById('playerX');
 var playerY = document.getElementById('playerY');
+
+//X & Y "Cards in Play"
 var playerXCard = document.getElementById('playerXcard');
 var playerYCard = document.getElementById('playerYcard');
+
+//Button
 var regularPlay = document.getElementById('normal-play');
+
+
+//Dynamic Elements
 var statusMessage = document.getElementById('status-message');
 var housestatusMessage = document.getElementById('houserules-status-message');
 var mediation = document.getElementById('mediation');
 var dynamicImage = document.getElementById('image-hold');
 var winMessage = document.getElementById('titlemessage');
-var gameBoard = document.getElementById('game');
+var playerXMediation = document.getElementById('playerXmediation');
+var playerYMediation = document.getElementById('playerYmediation');
+
 
 
 
 /*----- event listeners -----*/ 
 regularPlay.addEventListener('click',gamePlay);
-
+var resetPlay = document.getElementById('reset').addEventListener('click',reload);
 
 
 /*----- functions -----*/
@@ -84,12 +93,13 @@ function pickOne(){
 
 
 function checkForVals(){
-    
     if (xCardValue < yCardValue){
         xHand.push(yCardStatus,xCardStatus);
+        statusMessage.textContent = "Player X wins this round!" 
     }
     if (yCardValue < xCardValue){
         yHand.push(xCardStatus,yCardStatus);
+        statusMessage.textContent = "Player Y wins this round!" 
     } 
     else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){   
         pickFour();
@@ -116,14 +126,15 @@ function checkforMultVals(){
     if (xFour.length === 4 && yFour.length === 4){
         if (xCardValue < yCardValue){
             xPush();
+            winMessage.textContent = "Player X wins this round of mediation."
+
         }
         if (yCardValue < xCardValue){
             yPush();
+            winMessage.textContent = "Player Y wins this round of mediation."
         }
          if (yCardValue === xCardValue) {
-
             setTimeout(houseRules, 1000);
-
         } 
     }
 }
@@ -147,28 +158,26 @@ function yPush(){
     }
     for (var i = 0; i<yFour.length;i++){
         yHand.push(yFour[i]);
-
     }
-
 
 }
 
 
 //need a set time out here
 function houseRules(){
-    housestatusMessage.textContent = "Enough arguing! The least combative suit will win this round."
     let ranks = {'h':0, 'd':1, 's':2, 'c':3};
     var houseyCardValue = ranks[yFour[0].charAt(0)];
     var housexCardValue = ranks[xFour[0].charAt(0)];
-
     if (houseyCardValue < housexCardValue){
         yPush();
+        winMessage.textContent = "Enough arguing! The least combative suit - Player Y's- will win this round."
+
     }
 
     if (housexCardValue < houseyCardValue){
         xPush();
-
-}
+        winMessage.textContent = "Enough arguing! The least combative suit - Player X's- will win this round."
+    }
 }
 
 
@@ -177,33 +186,36 @@ function houseRules(){
 function render(){
     playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xCardStatus}.svg')`;
     playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yCardStatus}.svg')`;        
-    // playerX.classList.add('cardbackX');
-    // playerY.classList.add('cardbackY');
-    if (yFour == undefined){
 
-    }
     if (yFour !== undefined){
-        //placeholder for cards underneath!?????
-        playerXCard.textContent = '+3' ;
-        playerYCard.textContent = '+3' ;
-       
+        console.log(yFour);
+        playerYMediation.classList.add('cardbackMediate');
+        playerXMediation.classList.add('cardbackMediate');
     }
 }
 
 function clearRound(){
+    winMessage.textContent = "✌️Peace: An Amicable Game ✌️";
+    yFour = undefined;
+    xFour = undefined;
     yCardStatus = undefined;
     xCardStatus = undefined;
-    mediation.classList.add('normal');
+    // mediation.classList.add('normal');
     mediation.textContent = '';
     dynamicImage.classList.remove('mediation-img');
     housestatusMessage.textContent = '';
     statusMessage.textContent = '';
+    playerYMediation.classList.add('removeborder');
+    playerYMediation.classList.remove('cardbackMediate');
+    playerXMediation.classList.add('removeborder');
+    playerXMediation.classList.remove('cardbackMediate');
+
     
 }
 
 function checkForWin(){
     if (xHand.length === 0){
-        winMessage.textContent = 'player Y ftw'
+        winMessage.textContent = 'Player Y Wins!'
         regularPlay.removeEventListener("click", gamePlay);
         playerX.classList.remove('cardbackX','cell','cell-3','container');
 
@@ -212,7 +224,7 @@ function checkForWin(){
 
     }
     if (yHand.length === 0 ){
-        winMessage.textContent = 'player X ftw'
+        winMessage.textContent = 'Player X Wins!'
         regularPlay.removeEventListener("click", gamePlay);
         playerY.classList.remove('cardbackY','cell','cell-3','container');
 
@@ -226,6 +238,11 @@ function init(){
     shuffleDeck();
     playerX.classList.add('cardbackX');
     playerY.classList.add('cardbackY');
+}
+
+
+function reload(){
+    location.reload();
 }
 
 init();

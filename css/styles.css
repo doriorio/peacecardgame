@@ -3,8 +3,8 @@
 body {
   background-color: black;
   background-position: center; 
-  background-size: contain;
-  background-repeat: no-repeat;
+  /* background-size: contain;
+  background-repeat: no-repeat; */
 }
 
 #game {
@@ -23,7 +23,7 @@ body {
   display: grid;
   justify-content: center;
   align-content: center;
-  grid-template-columns: 300px 200px 200px; 
+  grid-template-columns: 200px 200px 200px 200px; 
   grid-template-rows: 1fr 1fr; 
   row-gap: 10px;
   column-gap: 10px;
@@ -32,18 +32,18 @@ body {
   
 .container .cell {
   
-  height: 190px;
-  width: 135px;
-  border: 3px solid black;
-  background-size: contain;
-  box-shadow: 3px 3px 3px grey;
+  height: 188px;
+  width: 133px;
+
 
 
 }
 
-#image-hold, #gamestatus {
-  border: none;
-  box-shadow: 0 0 0 white;
+.withborder {
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-shadow: 3px 3px 3px grey;
+  border: 3px solid black;
 }
 
 .removeborder {
@@ -68,12 +68,22 @@ h2 {
 }
 
 
-#normal-play {
-  grid-column: 1 / span 3;
+button {
   outline: none;
-  background-color: #7628DB;
+
   color: white;
   height: 2rem;
+
+}
+
+#normal-play {
+  grid-column: span 3;
+  background-color: #7628DB;
+}
+
+#reset {
+  grid-column: span 1;
+  background-color: black;
 
 }
   
@@ -84,6 +94,17 @@ h2 {
   background-repeat: no-repeat;
   
 }
+
+.cardbackMediate {
+  
+  background-image: url(imgs/fourXcards.jpg);
+  justify-content: center;
+  background-position: center;  
+  background-size: contain;
+
+  
+}
+
 
 .cardbackX {
   background-image: url(imgs/playingcardbackX.jpg);
