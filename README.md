@@ -4,7 +4,7 @@
 
 ## Wireframe
 
-![] (css/imgs/wireframe.png)
+![wireframe] (https://github.com/doriorio/peacecardgame/blob/master/css/imgs/wireframe.png)
 
 ### The Rules
 WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
