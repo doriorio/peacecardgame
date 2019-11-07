@@ -29,6 +29,7 @@ var housestatusMessage = document.getElementById('houserules-status-message');
 var mediation = document.getElementById('mediation');
 var dynamicImage = document.getElementById('image-hold');
 var winMessage = document.getElementById('titlemessage');
+var gameBoard = document.getElementById('game');
 
 
 
@@ -53,18 +54,18 @@ function shuffleDeck() {
                 return;
             }
             xHand.push(card);
-            // playerX.innerHTML = xHand;
+
         } if (i >= 26) {
             if (yHand.length === 26) {
                 return;
             }
             yHand.push(card);
-            // playerY.innerHTML = yHand;
+
         }
     })
 }
 
-//think about moving clearround up ????????
+
 function gamePlay(){
     clearRound();
     pickOne()
@@ -114,22 +115,10 @@ function pickFour(){
 function checkforMultVals(){
     if (xFour.length === 4 && yFour.length === 4){
         if (xCardValue < yCardValue){
-            for (var i = 0; i<yFour.length;i++){
-                xHand.push(yFour[i]);
-            }
-            for (var i = 0; i<xFour.length;i++){
-                xHand.push(xFour[i]);
-         }
-            xHand.push(yCardStatus, xCardStatus);
+            xPush();
         }
         if (yCardValue < xCardValue){
-            for (var i = 0; i<xFour.length;i++){
-                yHand.push(xFour[i]);
-            }
-            for (var i = 0; i<yFour.length;i++){
-                yHand.push(yFour[i]);
-            }
-            yHand.push(yCardStatus, xCardStatus);
+            yPush();
         }
          if (yCardValue === xCardValue) {
 
@@ -139,6 +128,30 @@ function checkforMultVals(){
     }
 }
 
+function xPush(){
+    xHand.push(xCardStatus,yCardStatus);
+    for (var i = 0; i<xFour.length;i++){
+        xHand.push(xFour[i]);
+
+    }
+    for (var i = 0; i<yFour.length;i++){
+        xHand.push(yFour[i]);
+
+    }
+}
+
+function yPush(){
+    yHand.push(xCardStatus,yCardStatus);
+    for (var i = 0; i<xFour.length;i++){
+        yHand.push(xFour[i]);
+    }
+    for (var i = 0; i<yFour.length;i++){
+        yHand.push(yFour[i]);
+
+    }
+
+
+}
 
 
 //need a set time out here
@@ -149,29 +162,13 @@ function houseRules(){
     var housexCardValue = ranks[xFour[0].charAt(0)];
 
     if (houseyCardValue < housexCardValue){
-        yHand.push(xCardStatus,yCardStatus);
-        for (var i = 0; i<xFour.length;i++){
-            yHand.push(xFour[i]);
-
-        }
-        for (var i = 0; i<yFour.length;i++){
-            yHand.push(yFour[i]);
-
-        }
+        yPush();
     }
 
     if (housexCardValue < houseyCardValue){
-        xHand.push(xCardStatus,yCardStatus);
-        for (var i = 0; i<xFour.length;i++){
-            xHand.push(xFour[i]);
+        xPush();
 
-        }
-        for (var i = 0; i<yFour.length;i++){
-            xHand.push(yFour[i]);
-
-        }
-    }
-
+}
 }
 
 
@@ -186,6 +183,7 @@ function render(){
 
     }
     if (yFour !== undefined){
+        //placeholder for cards underneath!?????
         playerXCard.textContent = '+3' ;
         playerYCard.textContent = '+3' ;
        
@@ -200,25 +198,27 @@ function clearRound(){
     dynamicImage.classList.remove('mediation-img');
     housestatusMessage.textContent = '';
     statusMessage.textContent = '';
+    
 }
 
 function checkForWin(){
     if (xHand.length === 0){
         winMessage.textContent = 'player Y ftw'
         regularPlay.removeEventListener("click", gamePlay);
-        playerX.classList.remove('cardbackX');
+        playerX.classList.remove('cardbackX','cell','cell-3','container');
+
         playerX.classList.add('removeborder');
-        
-        //make the xHand HTML empty
+        regularPlay.style.display = 'none';
+
     }
     if (yHand.length === 0 ){
         winMessage.textContent = 'player X ftw'
         regularPlay.removeEventListener("click", gamePlay);
-        playerY.classList.remove('cardbackY');
-        playerY.classList.remove('container');
+        playerY.classList.remove('cardbackY','cell','cell-3','container');
+
         playerY.classList.add('removeborder');
-        
-        //make the yHand HTML empty
+        regularPlay.style.display = 'none';
+
     }
 }
 

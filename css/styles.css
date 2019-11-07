@@ -1,5 +1,4 @@
-/* other font in the google stylesheet
-font-family: 'Chathura', sans-serif; */
+
 
 body {
   background-color: black;
@@ -21,14 +20,14 @@ body {
 }
 
 .container {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    grid-template-columns: 300px 200px 200px; 
-    grid-template-rows: 1fr 1fr; 
-    row-gap: 10px;
-    column-gap: 10px;
-    align-content: space-between;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: 300px 200px 200px; 
+  grid-template-rows: 1fr 1fr; 
+  row-gap: 10px;
+  column-gap: 10px;
+  align-content: space-between;
   }
   
 .container .cell {
@@ -58,9 +57,7 @@ body {
   background-repeat: no-repeat;
 }
 
-h3 {
-  height: 25px;
-}
+
 
 h2 {
   font-weight: bold;
@@ -78,13 +75,6 @@ h2 {
   color: white;
   height: 2rem;
 
-}
-.normal {
-  background-image: url(imgs/peace.png);
-  background-position: center; 
-
-  background-size: contain;
-  background-repeat: no-repeat;
 }
   
 .cardbackY {
