@@ -236,6 +236,8 @@ function checkForWin(){
 
         playerX.classList.add('removeborder');
         regularPlay.style.display = 'none';
+        gameStatusMessage.textContent = "Don't worry Player X, just hit Reset and try again";
+
 
     }
     if (yHand.length === 0 ){
@@ -245,6 +247,8 @@ function checkForWin(){
 
         playerY.classList.add('removeborder');
         regularPlay.style.display = 'none';
+        gameStatusMessage.textContent = "Don't worry Player Y, just hit Reset and try again";
+
 
     }
 }

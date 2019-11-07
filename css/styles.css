@@ -43,6 +43,7 @@ body {
   background-size: contain;
   box-shadow: 3px 3px 3px grey;
   border: 3px solid black;
+  color: white;
 }
 
 .removeborder {
