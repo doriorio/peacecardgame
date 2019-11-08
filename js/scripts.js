@@ -76,8 +76,7 @@ function shuffleDeck() {
 
 
 function gamePlay(){
-    console.log(xHand.length + 'xhand length')
-    console.log(yHand.length + 'yhand length');
+
     clearRound();
     pickOne()
     checkForVals();
@@ -213,11 +212,11 @@ function render(){
 function clearRound(){
     winMessage.textContent = "✌️Peace: An Amicable Game ✌️";
     if (yHand > xHand){
-        gameStatusMessage.textContent = "Not that it's a contest, but Player Y is in the lead";
+        gameStatusMessage.textContent = `Not that it's a contest, but Player Y is in the lead by ${Math.abs(yHand.length-xHand.length)} cards`;
 
     }
     if (xHand > yHand){
-        gameStatusMessage.textContent = "Not that it's a contest, but Player X is in the lead";
+        gameStatusMessage.textContent = `Not that it's a contest, but Player X is in the lead by ${Math.abs(xHand.length-yHand.length)} cards`;
     }
     yFour = undefined;
     xFour = undefined;
