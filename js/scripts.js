@@ -92,7 +92,7 @@ function gamePlay(){
     clearRound();
     pickOne()
     checkForVals();
-    setTimeout(render, 300);
+    setTimeout(render, 100);
     checkForWin();
 }
 
@@ -115,7 +115,7 @@ function checkForVals(){
         statusMessage.textContent = "Player Y wins this round!" 
     } 
     else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){   
-        setTimeout(pickFour, 400);
+        setTimeout(pickFour, 100);
 
     }
 }
