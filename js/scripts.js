@@ -123,7 +123,7 @@ function checkForVals(){
 
 
 function pickFour(){
-    statusMessage.textContent = 'Mediation!'
+    statusMessage.textContent = 'Since you both drew the same card, mediation!'
 
     xFour = xHand.splice(0,4);
     yFour = yHand.splice(0,4);
