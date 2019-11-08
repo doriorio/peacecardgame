@@ -76,6 +76,18 @@ function shuffleDeck() {
 
 
 function gamePlay(){
+    if (Math.abs(xHand.length - yHand.length === 0) || Math.abs(yHand.length - xHand.length === 0)){
+        gameStatusMessage.textContent = "";
+        console.log('hitting');
+    }
+
+    else if (yHand > xHand){
+        gameStatusMessage.textContent = `Not that it's a contest, but Player Y is in the lead by ${Math.abs(yHand.length-xHand.length)} cards`;
+
+    }
+    else if (xHand > yHand){
+        gameStatusMessage.textContent = `Not that it's a contest, but Player X is in the lead by ${Math.abs(xHand.length-yHand.length)} cards`;
+    }
 
     clearRound();
     pickOne()
@@ -211,13 +223,13 @@ function render(){
 
 function clearRound(){
     winMessage.textContent = "✌️Peace: An Amicable Game ✌️";
-    if (yHand > xHand){
-        gameStatusMessage.textContent = `Not that it's a contest, but Player Y is in the lead by ${Math.abs(yHand.length-xHand.length)} cards`;
+    // if (yHand > xHand){
+    //     gameStatusMessage.textContent = `Not that it's a contest, but Player Y is in the lead by ${Math.abs(yHand.length-xHand.length)} cards`;
 
-    }
-    if (xHand > yHand){
-        gameStatusMessage.textContent = `Not that it's a contest, but Player X is in the lead by ${Math.abs(xHand.length-yHand.length)} cards`;
-    }
+    // }
+    // if (xHand > yHand){
+    //     gameStatusMessage.textContent = `Not that it's a contest, but Player X is in the lead by ${Math.abs(xHand.length-yHand.length)} cards`;
+    // }
     yFour = undefined;
     xFour = undefined;
     yCardStatus = undefined;
@@ -242,7 +254,9 @@ function checkForWin(){
         playerX.classList.remove('cardbackX','cell','cell-3','container');
         playerYMediation.classList.remove('cardbackMediate');
         playerXMediation.classList.remove('cardbackMediate');
+        playerXCard.style.backgroundImage = '';
         playerX.classList.add('removeborder');
+        playerY.classList.add('removeborder');
         regularPlay.style.display = 'none';
         gameStatusMessage.textContent = "Don't worry Player X, just hit Reset and try again";
 
@@ -255,6 +269,8 @@ function checkForWin(){
         playerYMediation.classList.remove('cardbackMediate');
         playerXMediation.classList.remove('cardbackMediate');
         playerY.classList.add('removeborder');
+        playerX.classList.add('removeborder');
+        playerYCard.style.backgroundImage = '';
         regularPlay.style.display = 'none';
         gameStatusMessage.textContent = "Don't worry Player Y, just hit Reset and try again";
 
