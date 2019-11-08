@@ -76,6 +76,8 @@ function shuffleDeck() {
 
 
 function gamePlay(){
+    console.log(xHand.length + 'xhand length')
+    console.log(yHand.length + 'yhand length');
     clearRound();
     pickOne()
     checkForVals();
@@ -140,7 +142,9 @@ function checkforMultVals(){
 }
 
 function xPush(){
-    xHand.push(xCardStatus,yCardStatus);
+
+    xHand.push(xCardStatus);
+    xHand.push(yCardStatus);
     for (var i = 0; i<xFour.length;i++){
         xHand.push(xFour[i]);
 
@@ -149,16 +153,20 @@ function xPush(){
         xHand.push(yFour[i]);
 
     }
+
 }
 
 function yPush(){
-    yHand.push(xCardStatus,yCardStatus);
+
+    yHand.push(xCardStatus);
+    yHand.push(yCardStatus);
     for (var i = 0; i<xFour.length;i++){
         yHand.push(xFour[i]);
     }
     for (var i = 0; i<yFour.length;i++){
         yHand.push(yFour[i]);
     }
+
 
 }
 
@@ -193,7 +201,7 @@ function render(){
     
 
     if (yFour !== undefined){
-        console.log(yFour);
+
         playerXCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${xFour[0]}.svg')`;
         playerYCard.style.backgroundImage = `url('css/card-deck-css/cardimages/${yFour[0]}.svg')`;
         playerYMediation.classList.add('cardbackMediate');

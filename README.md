@@ -1,7 +1,6 @@
 # Peace: An Amicable Game
 
 
-
 ## Wireframe
 
 ![wireframe] (https://github.com/doriorio/peacecardgame/blob/master/css/imgs/wireframe.png)
@@ -9,6 +8,7 @@
 ### The Rules
 WikiHow: How To Play (https://www.wikihow.com/Play-War-(Card-Game))
 ## Houserules
+-If someone's hand is empty, the other person wins
 -The lower scoring player gets all the cards ('peace' spin)
 -War is called 'mediation'
 -We don't like excessive fighting; rather than mediate recursively - in the instance that mediation is entered and the cards are equal, the more 'peaceful' suit gets the cards 
