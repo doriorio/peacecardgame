@@ -92,7 +92,7 @@ function gamePlay(){
     clearRound();
     pickOne()
     checkForVals();
-    render();
+    setTimeout(render, 300);
     checkForWin();
 }
 
@@ -115,7 +115,7 @@ function checkForVals(){
         statusMessage.textContent = "Player Y wins this round!" 
     } 
     else if (xCardValue === yCardValue && xCardValue !== undefined && yCardValue !== undefined){   
-        pickFour();
+        setTimeout(pickFour, 400);
 
     }
 }
@@ -147,7 +147,7 @@ function checkforMultVals(){
             winMessage.textContent = "Player Y wins this round of mediation."
         }
          if (yCardValue === xCardValue) {
-            houseRules();
+            setTimeout(houseRules, 400);
         } 
     }
 }
@@ -223,18 +223,12 @@ function render(){
 
 function clearRound(){
     winMessage.textContent = "✌️Peace: An Amicable Game ✌️";
-    // if (yHand > xHand){
-    //     gameStatusMessage.textContent = `Not that it's a contest, but Player Y is in the lead by ${Math.abs(yHand.length-xHand.length)} cards`;
-
-    // }
-    // if (xHand > yHand){
-    //     gameStatusMessage.textContent = `Not that it's a contest, but Player X is in the lead by ${Math.abs(xHand.length-yHand.length)} cards`;
-    // }
+    statusMessage.textContent = '';
     yFour = undefined;
     xFour = undefined;
     yCardStatus = undefined;
     xCardStatus = undefined;
-    // mediation.classList.add('normal');
+
     mediation.textContent = '';
     dynamicImage.classList.remove('mediation-img');
 
