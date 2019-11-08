@@ -66,10 +66,10 @@ Vanilla JS, HTML, CSS
 ## Wishlist
 * Countdown for every turn - 3,2,1 go!
 * Different cursors for each player that alternate based on turn
-* A delay in flipping the card
+* A delay in flipping the card - overall timing the functions
 * Animations
-* Peaceful music
-* Cutesy mediation 'cues' during mediation
-* Dynamic score counter
+* <del>Peaceful music</del>
+* <del>Cutesy mediation 'cues' during house rules</del>
+* <del>Dynamic score counter</del>
 * Make players be countries: Canada & switzerland and have a map highlight with the country (player) based on who wins the cards in the turn
 
